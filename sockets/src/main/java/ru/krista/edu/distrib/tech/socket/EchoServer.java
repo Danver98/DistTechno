@@ -13,13 +13,14 @@ public class EchoServer {
     private Socket clientSocket;
     private PrintWriter out;
     private BufferedReader in;
+    static int SURNAME_PORT = 6000;
 
     public void start(int port) throws IOException {
         serverSocket = new ServerSocket(port);
         clientSocket = serverSocket.accept();
         System.out.println("New client");
         out = new PrintWriter(clientSocket.getOutputStream(), true);
-        if (port == 6000){
+        if (port == SURNAME_PORT){
             out.println("Vereshchagin");
             return;
         }
@@ -41,6 +42,6 @@ public class EchoServer {
 
     public static void main(String[] args) throws IOException {
         EchoServer server = new EchoServer();
-        server.start(5555);
+        server.start(6000);
     }
 }

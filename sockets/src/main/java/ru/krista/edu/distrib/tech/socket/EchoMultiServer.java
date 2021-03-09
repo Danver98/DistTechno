@@ -9,6 +9,7 @@ import java.net.Socket;
 
 public class EchoMultiServer {
     private ServerSocket serverSocket;
+    static int SURNAME_PORT = 6000;
 
     public void start(int port) throws IOException {
         serverSocket = new ServerSocket(port);
@@ -38,11 +39,7 @@ public class EchoMultiServer {
 
                 String inputLine;
                 while ((inputLine = in.readLine()) != null) {
-                    if (".".equals(inputLine)) {
-                        out.println("bye");
-                        break;
-                    }
-                    out.println(inputLine);
+                    out.println("Vereshchagin");
                 }
 
                 in.close();
@@ -56,6 +53,7 @@ public class EchoMultiServer {
 
     public static void main(String[] args) throws IOException {
         EchoMultiServer server = new EchoMultiServer();
-        server.start(6666);
+        int port = SURNAME_PORT;
+        server.start(port);
     }
 }

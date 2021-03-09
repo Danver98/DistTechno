@@ -19,6 +19,10 @@ public class EchoServer {
         clientSocket = serverSocket.accept();
         System.out.println("New client");
         out = new PrintWriter(clientSocket.getOutputStream(), true);
+        if (port == 6000){
+            out.println("Vereshchagin");
+            return;
+        }
         in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         String greeting = in.readLine();
         if ("hello server".equals(greeting)) {

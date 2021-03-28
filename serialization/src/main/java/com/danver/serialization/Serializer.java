@@ -22,31 +22,33 @@ public class Serializer {
     }
 
 
-    public void serializeToJson(Object obj, String pathToFile) throws IOException {
-        jsonMapper.writeValue(new File(pathToFile),obj);
+    public String  serializeToJson(Object obj, String pathToFile) throws IOException {
+        return jsonMapper.writeValueAsString(obj);
     }
 
-    public Object deserializeFromJson(Class _class, String pathToFile) throws IOException {
-        return jsonMapper.readValue(new File(pathToFile), _class);
+    public Object deserializeFromJson(Class _class, String data) throws IOException {
+        return jsonMapper.readValue(data, _class);
     }
 
-    public void serializeToXML(Object obj, String pathToFile) throws IOException {
-        xmlMapper.writeValue(new File(pathToFile), obj);
+    public String serializeToXML(Object obj) throws IOException {
+        return xmlMapper.writeValueAsString(obj);
     }
 
-    public Object deserializeFromXML(Class _class, String pathToFile) throws IOException {
-        return xmlMapper.readValue(new File(pathToFile), _class);
+    public Object deserializeFromXML(Class _class, String data) throws IOException {
+        return xmlMapper.readValue(data, _class);
     }
 
-    public void serializeToYAML(Object obj, String pathToFile) throws IOException {
-        yamlMapper.writeValue(new File(pathToFile),obj);
+    public String serializeToYAML(Object obj) throws IOException {
+        return yamlMapper.writeValueAsString(obj);
     }
 
-    public Object deserializeFromYAML(Class _class, String pathToFile) throws IOException {
-        return yamlMapper.readValue(new File(pathToFile), _class);
+    public Object deserializeFromYAML(Class _class, String data) throws IOException {
+        return yamlMapper.readValue(data, _class);
     }
 
-    public static void main(String [] args){
+    public static void main(String [] args) throws IOException {
+        System.out.println(new File("").getPath());
         System.out.println(new File("").getAbsolutePath());
+        System.out.println(new File("").getCanonicalPath());
     }
 }

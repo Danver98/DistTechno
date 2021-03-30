@@ -15,12 +15,7 @@ public class Address implements Serializable {
     private int apartmentNumber;
 
     public Address(){
-        this.postalCode = 0;
-        this.country = "Country";
-        this.city = "city";
-        this.street = "street";
-        this.houseNumber = 1;
-        this.apartmentNumber = 1;
+
     }
 
     public Address(int postalCode, String country, String city, String street, int houseNumber, int apartmentNumber) {

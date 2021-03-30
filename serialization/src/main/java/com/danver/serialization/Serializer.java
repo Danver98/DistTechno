@@ -3,9 +3,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.fasterxml.jackson.dataformat.yaml.YAMLGenerator;
 
-import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Collections;
 
 public class Serializer {
 
@@ -16,13 +18,13 @@ public class Serializer {
     public Serializer(){
         jsonMapper = new ObjectMapper();
         xmlMapper = new XmlMapper();
-        yamlMapper = new ObjectMapper(new YAMLFactory());
+        yamlMapper = new ObjectMapper(new YAMLFactory().disable(YAMLGenerator.Feature.WRITE_DOC_START_MARKER));
         yamlMapper.findAndRegisterModules();
         yamlMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
     }
 
 
-    public String  serializeToJson(Object obj, String pathToFile) throws IOException {
+    public String  serializeToJson(Object obj) throws IOException {
         return jsonMapper.writeValueAsString(obj);
     }
 
@@ -46,9 +48,5 @@ public class Serializer {
         return yamlMapper.readValue(data, _class);
     }
 
-    public static void main(String [] args) throws IOException {
-        System.out.println(new File("").getPath());
-        System.out.println(new File("").getAbsolutePath());
-        System.out.println(new File("").getCanonicalPath());
-    }
+    
 }

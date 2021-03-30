@@ -1,11 +1,14 @@
 package com.danver.serialization;
 
-
-//import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Organization {
     private static final long serialVersionUID = 1L;
@@ -14,7 +17,8 @@ public class Organization {
     private Address address;
     private List<Person> employees;
     private List<Phone> phones;
-    //@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "%Y-%m-%d")
+    @JsonSerialize(using= LocalDateSerializer.class)
+    @JsonDeserialize(using= LocalDateDeserializer.class)
     private LocalDate foundationDate;
 
     public Organization(){
@@ -72,5 +76,16 @@ public class Organization {
         this.foundationDate = foundationDate;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Organization that = (Organization) o;
+        return name.equals(that.name) && address.equals(that.address) && Objects.equals(employees, that.employees) && Objects.equals(phones, that.phones) && Objects.equals(foundationDate, that.foundationDate);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, address, employees, phones, foundationDate);
+    }
 }

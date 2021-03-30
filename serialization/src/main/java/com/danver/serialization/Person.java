@@ -12,19 +12,18 @@ public class Person implements Serializable {
     private int age;
     private boolean isMarried;
     private Address address;
+    private Phone phone;
 
     public Person(){
-        this.name = "name";
-        this.surname = "surname";
-        this.age = 10;
-        this.isMarried = false;
     }
 
-    public Person(String name,String surname, int age, boolean isMarried ){
+    public Person(String name,String surname, int age, boolean isMarried, Address address,Phone phone){
         this.name = name;
         this.surname = surname;
         this.age = age;
         this.isMarried = isMarried;
+        this.address = address;
+        this.phone = phone;
     }
 
     public String getName() {
@@ -67,16 +66,28 @@ public class Person implements Serializable {
         this.address = address;
     }
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public Phone getPhone() {
+        return phone;
+    }
+
+    public void setPhone(Phone phone) {
+        this.phone = phone;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
-        return age == person.age && isMarried == person.isMarried && Objects.equals(name, person.name) && Objects.equals(surname, person.surname) && Objects.equals(address, person.address);
+        return age == person.age && isMarried == person.isMarried && name.equals(person.name) && surname.equals(person.surname) && Objects.equals(address, person.address) && Objects.equals(phone, person.phone);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, surname, age, isMarried, address);
+        return Objects.hash(name, surname, age, isMarried, address, phone);
     }
 }

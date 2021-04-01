@@ -48,5 +48,13 @@ public class Serializer {
         return yamlMapper.readValue(data, _class);
     }
 
-    
+    public static void main(String [] args) throws IOException {
+        Organization org = new Organization("Tensor",new Address(1000,"Russia","Yaroslavl","Uglichskaya",44,0), LocalDate.of(1996,06,10));
+        Collections.addAll(org.getPhones(), new Phone(7,"9612345678",LocalDate.now()), new Phone(7,"9612345679",LocalDate.now()));
+        Person Ivan =  new Person("Ivan","Ivanov",22,false, new Address(1,"Russia","Yaroslavl","Pervomayskaya",1,1), new Phone(7,"9612343322",LocalDate.now()));
+        Person Vasiliy = new Person("Vasiliy","Vasiliev",19,true, new Address(1,"Russia","Yaroslavl","Sovetskaya",10,12),new Phone(7,"9612342135",LocalDate.now()));
+        Person Dmitriy = new Person("Dmitriy","Ivanov",23,false, new Address(1,"Russia","Yaroslavl","Slepneva",64,15),new Phone(7,"9612347777",LocalDate.now()));
+        Collections.addAll(org.getEmployees(), Ivan,Vasiliy,Dmitriy);
+        System.out.println(new Serializer().serializeToXML(org));
+    }
 }

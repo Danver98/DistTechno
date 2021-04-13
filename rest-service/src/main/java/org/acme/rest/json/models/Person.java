@@ -1,5 +1,10 @@
 package org.acme.rest.json.models;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -7,17 +12,25 @@ public class Person {
     private int id;
     private String name;
     private String surname;
+    @JsonSerialize(using= LocalDateSerializer.class)
+    @JsonDeserialize(using= LocalDateDeserializer.class)
     private LocalDate birthdate;
 
+    //Empty constructor for JSON-serializer
     public Person(){
 
     }
 
-    public Person(int id, String name, String surname, LocalDate birthdate){
-        this.id = id;
+    public Person(String name, String surname, LocalDate birthdate){
+        this.id = 0;
         this.name = name;
         this.surname = surname;
         this.birthdate = birthdate;
+    }
+
+    public Person(int id, String name, String surname, LocalDate birthdate){
+        this(name,surname,birthdate);
+        this.id = id;
     }
 
     public int getId() {
